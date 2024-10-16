@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "filter-css": "node index.js"
+    "css-filter": "node index.js"
   },
   "author": "Georgios Drivas",
   "license": "ISC",
