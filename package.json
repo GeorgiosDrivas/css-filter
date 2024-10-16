@@ -1,0 +1,11 @@
+{
+  "name": "css-filter",
+  "version": "1.0.0",
+  "description": "Easy way to trace unused css rules in your css files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Georgios Drivas",
+  "license": "ISC"
+}
