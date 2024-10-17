@@ -1,10 +1,10 @@
 const puppeteer = require("puppeteer");
 const path = require("path");
 
-const htmlFilePath = process.argv[2];
+const FilePath = process.argv[2];
 
-if (!htmlFilePath) {
-  console.error("Please provide the path to an HTML file.");
+if (!FilePath) {
+  console.error("Please provide the path to a file.");
   process.exit(1);
 }
 
@@ -13,7 +13,7 @@ if (!htmlFilePath) {
     args: ["--allow-file-access-from-files"],
   });
   const page = await browser.newPage();
-  await page.goto(`file://${path.resolve(htmlFilePath)}`);
+  await page.goto(`file://${path.resolve(FilePath)}`);
 
   const unusedCssFinder = await page.evaluate(() => {
     const rules = document.styleSheets;
@@ -24,8 +24,9 @@ if (!htmlFilePath) {
         let ruleSet = rules[j].cssRules;
         for (let i = 0; i < ruleSet.length; i++) {
           let rule = ruleSet[i].selectorText.substring(1);
+          let ruleFile = ruleSet[i].parentStyleSheet.href;
           if (document.getElementsByClassName(rule).length === 0) {
-            unusedRules.push(rule);
+            unusedRules.push({ rule, ruleFile });
           }
         }
       } catch (e) {
