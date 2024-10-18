@@ -1,43 +1,33 @@
-const puppeteer = require("puppeteer");
+const fs = require("fs");
 const path = require("path");
+const postcss = require("postcss");
+const { JSDOM } = require("jsdom");
 
-const FilePath = process.argv[2];
+const cssFilePath = process.argv[2];
+const htmlFilePath = process.argv[3];
 
-if (!FilePath) {
-  console.error("Please provide the path to a file.");
+if (!cssFilePath || !htmlFilePath) {
+  console.error(
+    "Please provide the paths to both a CSS file and an HTML file."
+  );
   process.exit(1);
 }
 
-(async () => {
-  const browser = await puppeteer.launch({
-    args: ["--allow-file-access-from-files"],
-  });
-  const page = await browser.newPage();
-  await page.goto(`file://${path.resolve(FilePath)}`);
+// Read and parse the CSS file
+const cssContent = fs.readFileSync(cssFilePath, "utf-8");
+const htmlContent = fs.readFileSync(htmlFilePath, "utf-8");
 
-  const unusedCssFinder = await page.evaluate(() => {
-    const rules = document.styleSheets;
-    const unusedRules = [];
+// Parse HTML content using JSDOM
+const dom = new JSDOM(htmlContent);
+const document = dom.window.document;
 
-    for (let j = 0; j < rules.length; j++) {
-      try {
-        let ruleSet = rules[j].cssRules;
-        for (let i = 0; i < ruleSet.length; i++) {
-          let rule = ruleSet[i].selectorText.substring(1);
-          let ruleFile = ruleSet[i].parentStyleSheet.href;
-          if (document.getElementsByClassName(rule).length === 0) {
-            unusedRules.push({ rule, ruleFile });
-          }
-        }
-      } catch (e) {
-        console.warn(
-          `Could not access stylesheet: ${rules[j].href}. Error: ${e.message}`
-        );
-      }
-    }
-    return unusedRules;
-  });
+postcss.parse(cssContent).walkRules((rule) => {
+  const selector = rule.selector;
 
-  console.log("Unused CSS rules:", unusedCssFinder);
-  await browser.close();
-})();
+  // Check if any elements match the selector
+  const elements = document.querySelectorAll(selector);
+
+  if (elements.length === 0) {
+    console.log(`Unused CSS rule: ${selector}`);
+  }
+});
