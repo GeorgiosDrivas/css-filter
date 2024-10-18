@@ -16,6 +16,6 @@ Add this script in your package.json file:
 
 Once it is installed, run the command:
 
-- npm run css-filter -- /path-to-your-file
+- npm run css-filter -- /path-to-your-css-file /path-to-your-html-file
 
   The results will be posted in the command line
