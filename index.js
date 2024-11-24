@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");
 const postcss = require("postcss");
 const { JSDOM } = require("jsdom");
 
