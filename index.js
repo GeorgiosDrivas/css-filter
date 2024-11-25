@@ -25,8 +25,10 @@ postcss.parse(cssContent).walkRules((rule) => {
 
   // Check if any elements match the selector
   const elements = document.querySelectorAll(selector);
+  const { line, column } = rule.source.start;
+  const vscodeLink = `${cssFilePath}:${line}:${column}`;
 
   if (elements.length === 0) {
-    console.log(`Unused CSS rule: ${selector}`);
+    console.log(`Unused CSS rule: ${selector}. Click here: ${vscodeLink}`);
   }
 });
