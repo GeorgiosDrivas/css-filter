@@ -4,7 +4,7 @@
   "description": "Easy way to track unused css rules in your css files",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "css-filter": "node index.js"
   },
   "author": "Georgios Drivas",
@@ -18,5 +18,8 @@
   "dependencies": {
     "jsdom": "^25.0.1",
     "postcss": "^8.4.47"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
