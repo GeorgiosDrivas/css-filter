@@ -1,5 +1,4 @@
 const findUnusedCSSRules = require("../findUnusedCSSRules");
-const { JSDOM } = require("jsdom");
 const { cssContent, htmlContent, secondHtmlContent, cssFilePath } = require("./constants");
 
 jest.mock("fs");

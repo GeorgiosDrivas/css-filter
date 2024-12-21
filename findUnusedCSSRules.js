@@ -1,4 +1,3 @@
-const fs = require("fs");
 const postcss = require("postcss");
 const { JSDOM } = require("jsdom");
 
