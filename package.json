@@ -1,6 +1,6 @@
 {
   "name": "@georgios-drivas/css-filter",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Easy way to track unused css rules in your css files",
   "main": "index.js",
   "scripts": {

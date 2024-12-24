@@ -1,6 +1,6 @@
 ## CSS Filter
 
-![npm](https://img.shields.io/npm/dm/%40georgios-drivas%2Fcss-filter) ![GitHub](https://img.shields.io/npm/l/%40georgios-drivas%2Fcss-filter)
+![npm](https://img.shields.io/npm/dy/%40georgios-drivas%2Fcss-filter) ![GitHub](https://img.shields.io/npm/l/%40georgios-drivas%2Fcss-filter)
 
 An npm package that checks HTML files for unused CSS rules.
 
